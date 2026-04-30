@@ -29,6 +29,7 @@ public class OverlayUI : MonoBehaviour
     {
         ConsumedRectsThisFrame.Clear();
 
+        // ── Status strip (always on) ──
         var mode = Plugin.Coordinator?.Mode.ToString() ?? "Probing";
         var label = $"CheatMenu-v2 | Mode: {mode} | F10: toggle";
         if (_flashText != null && Time.unscaledTime < _flashUntilTime)
@@ -36,11 +37,26 @@ public class OverlayUI : MonoBehaviour
         else
             _flashText = null;
 
-        const float width  = 360f;
-        const float height = 24f;
-        const float margin = 8f;
-        var rect = new Rect(Screen.width - width - margin, margin, width, height);
-        GUI.Box(rect, label);
-        ConsumedRectsThisFrame.Add(rect);
+        const float stripW = 360f, stripH = 24f, margin = 8f;
+        var stripRect = new Rect(Screen.width - stripW - margin, margin, stripW, stripH);
+        GUI.Box(stripRect, label);
+        ConsumedRectsThisFrame.Add(stripRect);
+
+        // ── Fallback button strip (only when Mode == Fallback && IsOpen) ──
+        var coord = Plugin.Coordinator;
+        if (coord == null || coord.Mode != CheatMode.Fallback || !coord.IsOpen) return;
+
+        const float panelW = 260f, panelH = 76f;
+        var panelRect = new Rect(margin, margin, panelW, panelH);
+        GUI.Box(panelRect, "Cheats (Fallback)");
+        ConsumedRectsThisFrame.Add(panelRect);
+
+        var btnRect = new Rect(margin + 8, margin + 28, panelW - 16, 32);
+        if (GUI.Button(btnRect, "+10000 Gold (all resources)"))
+        {
+            Plugin.Dispatcher.AddAllResources(10000);
+            Flash("+10000 res", 1.5f);
+        }
+        ConsumedRectsThisFrame.Add(btnRect);
     }
 }

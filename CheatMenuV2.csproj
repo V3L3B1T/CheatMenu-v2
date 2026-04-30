@@ -28,6 +28,7 @@
     <Reference Include="UnityEngine.IMGUIModule"> <HintPath>refs\UnityEngine.IMGUIModule.dll</HintPath> <Private>false</Private> </Reference>
     <Reference Include="UnityEngine.InputLegacyModule"> <HintPath>refs\UnityEngine.InputLegacyModule.dll</HintPath> <Private>false</Private> </Reference>
     <Reference Include="UnityEngine.UI">         <HintPath>refs\UnityEngine.UI.dll</HintPath>         <Private>false</Private> </Reference>
+    <!-- Pre-staged for Task 4: TMP_InputField suppression in InputGate.cs -->
     <Reference Include="Unity.TextMeshPro">      <HintPath>refs\Unity.TextMeshPro.dll</HintPath>      <Private>false</Private> </Reference>
     <Reference Include="Hex">                    <HintPath>refs\Hex.dll</HintPath>                    <Private>false</Private> </Reference>
     <Reference Include="Hex.Shared">             <HintPath>refs\Hex.Shared.dll</HintPath>             <Private>false</Private> </Reference>

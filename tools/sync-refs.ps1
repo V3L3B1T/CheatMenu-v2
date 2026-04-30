@@ -5,6 +5,11 @@ param(
     [Parameter(Mandatory=$true)] [string] $GameRoot
 )
 
+if (-not (Test-Path $GameRoot -PathType Container)) {
+    Write-Error "GameRoot not found: '$GameRoot'. Provide the full path to the game install directory."
+    exit 1
+}
+
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path $PSScriptRoot -Parent
 $refsDir  = Join-Path $repoRoot 'refs'
@@ -18,7 +23,7 @@ $bepinex = @(
     'BepInEx\core\Il2CppInterop.Runtime.dll',
     'BepInEx\core\Il2CppInterop.Common.dll',
     'BepInEx\core\Il2CppInterop.HarmonySupport.dll',
-    'BepInEx\core\Mono.Cecil.dll'
+    'BepInEx\core\Mono.Cecil.dll'    # used by ad-hoc recon scripts only; not referenced by csproj
 )
 
 $unity = @(
@@ -34,7 +39,7 @@ $interop = @(
     'BepInEx\interop\Il2CppSystem.dll',
     'BepInEx\interop\Il2CppSystem.Core.dll',
     'BepInEx\interop\UnityEngine.UI.dll',
-    'BepInEx\interop\Unity.TextMeshPro.dll'
+    'BepInEx\interop\Unity.TextMeshPro.dll'  # for Task 4: TMP_InputField suppression in InputGate
 )
 
 $all = $bepinex + $unity + $interop

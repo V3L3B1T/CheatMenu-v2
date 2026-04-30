@@ -27,7 +27,8 @@
     <Reference Include="UnityEngine.CoreModule"> <HintPath>refs\UnityEngine.CoreModule.dll</HintPath> <Private>false</Private> </Reference>
     <Reference Include="UnityEngine.IMGUIModule"> <HintPath>refs\UnityEngine.IMGUIModule.dll</HintPath> <Private>false</Private> </Reference>
     <Reference Include="UnityEngine.InputLegacyModule"> <HintPath>refs\UnityEngine.InputLegacyModule.dll</HintPath> <Private>false</Private> </Reference>
-    <Reference Include="UnityEngine.UIModule">   <HintPath>refs\UnityEngine.UIModule.dll</HintPath>   <Private>false</Private> </Reference>
+    <Reference Include="UnityEngine.UI">         <HintPath>refs\UnityEngine.UI.dll</HintPath>         <Private>false</Private> </Reference>
+    <Reference Include="Unity.TextMeshPro">      <HintPath>refs\Unity.TextMeshPro.dll</HintPath>      <Private>false</Private> </Reference>
     <Reference Include="Hex">                    <HintPath>refs\Hex.dll</HintPath>                    <Private>false</Private> </Reference>
     <Reference Include="Hex.Shared">             <HintPath>refs\Hex.Shared.dll</HintPath>             <Private>false</Private> </Reference>
     <Reference Include="Il2Cppmscorlib">         <HintPath>refs\Il2Cppmscorlib.dll</HintPath>         <Private>false</Private> </Reference>

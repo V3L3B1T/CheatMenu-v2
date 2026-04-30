@@ -24,9 +24,7 @@ $bepinex = @(
 $unity = @(
     'BepInEx\unity-libs\UnityEngine.CoreModule.dll',
     'BepInEx\unity-libs\UnityEngine.IMGUIModule.dll',
-    'BepInEx\unity-libs\UnityEngine.InputLegacyModule.dll',
-    'BepInEx\unity-libs\UnityEngine.UI.dll',
-    'BepInEx\unity-libs\UnityEngine.UIModule.dll'
+    'BepInEx\unity-libs\UnityEngine.InputLegacyModule.dll'
 )
 
 $interop = @(
@@ -34,7 +32,9 @@ $interop = @(
     'BepInEx\interop\Hex.Shared.dll',
     'BepInEx\interop\Il2Cppmscorlib.dll',
     'BepInEx\interop\Il2CppSystem.dll',
-    'BepInEx\interop\Il2CppSystem.Core.dll'
+    'BepInEx\interop\Il2CppSystem.Core.dll',
+    'BepInEx\interop\UnityEngine.UI.dll',
+    'BepInEx\interop\Unity.TextMeshPro.dll'
 )
 
 $all = $bepinex + $unity + $interop

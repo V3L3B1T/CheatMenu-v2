@@ -8,8 +8,6 @@ public class OverlayUI : MonoBehaviour
 {
     public OverlayUI(IntPtr ptr) : base(ptr) { }
 
-    // Public state — set by MenuCoordinator in later tasks.
-    public string ModeText = "Probing";
 
     // Flash messages: short-lived overlay text.
     private string _flashText;
@@ -31,7 +29,8 @@ public class OverlayUI : MonoBehaviour
     {
         ConsumedRectsThisFrame.Clear();
 
-        var label = $"CheatMenu-v2 | Mode: {ModeText} | F10: toggle";
+        var mode = Plugin.Coordinator?.Mode.ToString() ?? "Probing";
+        var label = $"CheatMenu-v2 | Mode: {mode} | F10: toggle";
         if (_flashText != null && Time.unscaledTime < _flashUntilTime)
             label += $"  |  {_flashText}";
         else

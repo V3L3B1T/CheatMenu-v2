@@ -19,6 +19,7 @@ public class Plugin : BasePlugin
     internal static GameObject  Host    = null;
     internal static OverlayUI   Overlay = null;
     internal static InputGate   Input   = null;
+    internal static MenuCoordinator Coordinator = null;
     internal static BepInEx.Configuration.ConfigEntry<KeyCode> ToggleKey = null;
 
     public override void Load()
@@ -53,6 +54,9 @@ public class Plugin : BasePlugin
         Input.Toggle = ToggleKey.Value;
         ToggleKey.SettingChanged += (_, _) => { Input.Toggle = ToggleKey.Value; Log.LogInfo($"Toggle hotkey changed to {ToggleKey.Value}"); };
 
-        Log.LogInfo("Host GameObject created; OverlayUI + InputGate attached");
+        Coordinator = new MenuCoordinator();
+        Input.OnTogglePressed = () => Coordinator.Toggle();
+
+        Log.LogInfo("Host GameObject created; OverlayUI + InputGate attached; Coordinator wired");
     }
 }

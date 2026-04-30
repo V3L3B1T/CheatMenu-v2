@@ -3,7 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <!-- Skip emitting nullable attributes — IL2CPP-wrapped UnityEngine.CoreModule
+         shadows System.Runtime.CompilerServices.NullableAttribute, which the compiler
+         would otherwise need to embed and fail to find. -->
+    <NoWarn>$(NoWarn);CS8632</NoWarn>
+    <Features>nullablePublicOnly</Features>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <AssemblyName>CheatMenu-v2</AssemblyName>
     <RootNamespace>CheatMenuV2</RootNamespace>

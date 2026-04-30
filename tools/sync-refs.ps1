@@ -26,23 +26,24 @@ $bepinex = @(
     'BepInEx\core\Mono.Cecil.dll'    # used by ad-hoc recon scripts only; not referenced by csproj
 )
 
-$unity = @(
-    'BepInEx\unity-libs\UnityEngine.CoreModule.dll',
-    'BepInEx\unity-libs\UnityEngine.IMGUIModule.dll',
-    'BepInEx\unity-libs\UnityEngine.InputLegacyModule.dll'
-)
-
+# IL2CPP plugins must reference the IL2CPP-wrapped UnityEngine modules from interop/,
+# NOT the Mono stubs in unity-libs/. The Mono stubs lack the IntPtr ctor required for
+# inheriting from MonoBehaviour in IL2CPP — using them silently produces classes that
+# Unity will refuse to AddComponent at runtime.
 $interop = @(
     'BepInEx\interop\Hex.dll',
     'BepInEx\interop\Hex.Shared.dll',
     'BepInEx\interop\Il2Cppmscorlib.dll',
     'BepInEx\interop\Il2CppSystem.dll',
     'BepInEx\interop\Il2CppSystem.Core.dll',
+    'BepInEx\interop\UnityEngine.CoreModule.dll',
+    'BepInEx\interop\UnityEngine.IMGUIModule.dll',
+    'BepInEx\interop\UnityEngine.InputLegacyModule.dll',
     'BepInEx\interop\UnityEngine.UI.dll',
     'BepInEx\interop\Unity.TextMeshPro.dll'  # for Task 4: TMP_InputField suppression in InputGate
 )
 
-$all = $bepinex + $unity + $interop
+$all = $bepinex + $interop
 foreach ($rel in $all) {
     $src = Join-Path $GameRoot $rel
     if (-not (Test-Path $src)) {

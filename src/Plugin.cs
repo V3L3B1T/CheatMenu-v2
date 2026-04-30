@@ -1,6 +1,7 @@
 using System;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
+using CheatMenuV2.Commands;
 using CheatMenuV2.Input;
 using CheatMenuV2.UI;
 using Il2CppInterop.Runtime.Injection;
@@ -19,7 +20,8 @@ public class Plugin : BasePlugin
     internal static GameObject  Host    = null;
     internal static OverlayUI   Overlay = null;
     internal static InputGate   Input   = null;
-    internal static MenuCoordinator Coordinator = null;
+    internal static MenuCoordinator   Coordinator = null;
+    internal static CommandDispatcher Dispatcher  = null;
     internal static BepInEx.Configuration.ConfigEntry<KeyCode> ToggleKey = null;
 
     public override void Load()
@@ -55,6 +57,7 @@ public class Plugin : BasePlugin
         ToggleKey.SettingChanged += (_, _) => { Input.Toggle = ToggleKey.Value; Log.LogInfo($"Toggle hotkey changed to {ToggleKey.Value}"); };
 
         Coordinator = new MenuCoordinator();
+        Dispatcher  = new CommandDispatcher();
         Input.OnTogglePressed = () => Coordinator.Toggle();
 
         Log.LogInfo("Host GameObject created; OverlayUI + InputGate attached; Coordinator wired");

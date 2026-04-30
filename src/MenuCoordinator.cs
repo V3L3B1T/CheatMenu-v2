@@ -15,12 +15,19 @@ public class MenuCoordinator
 
     private void Open()
     {
-        // Task 9 will replace this with: try NativePanelDriver.Open(); falls back to CommandDispatcher.
-        // For now: flip to Failed so the overlay reflects we don't have backends wired.
-        Mode = CheatMode.Failed;
         IsOpen = true;
-        Plugin.Overlay.Flash("Menu open (no backend yet)");
-        Plugin.Log.LogInfo($"Toggle ON — Mode={Mode}");
+        // Task 9 will insert: NativePanelDriver.Open() first; Fallback only if Native fails.
+        if (Plugin.Dispatcher.EnsureLocated())
+        {
+            Mode = CheatMode.Fallback;
+            Plugin.Log.LogInfo($"Toggle ON — Mode={Mode} (dispatcher only, no native panel yet)");
+        }
+        else
+        {
+            Mode = CheatMode.Failed;
+            Plugin.Log.LogError("Toggle ON — both backends unavailable");
+        }
+        Plugin.Overlay.Flash($"Mode={Mode}");
     }
 
     private void Close()

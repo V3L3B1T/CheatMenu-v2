@@ -15,7 +15,8 @@ public class Plugin : BasePlugin
     public const string Version = "0.1.0";
 
     internal static new BepInEx.Logging.ManualLogSource Log = null;
-    internal static GameObject Host = null;
+    internal static GameObject  Host    = null;
+    internal static OverlayUI   Overlay = null;
 
     public override void Load()
     {
@@ -30,10 +31,12 @@ public class Plugin : BasePlugin
 
         // §4.5 load-bearing rule: register every MonoBehaviour subclass before AddComponent.
         ClassInjector.RegisterTypeInIl2Cpp<MenuHostBehaviour>();
+        ClassInjector.RegisterTypeInIl2Cpp<OverlayUI>();
 
-        Host = new GameObject($"{Name}-Host");
+        Host    = new GameObject($"{Name}-Host");
         Host.AddComponent<MenuHostBehaviour>();
+        Overlay = Host.AddComponent<OverlayUI>();
         UnityEngine.Object.DontDestroyOnLoad(Host);
-        Log.LogInfo("Host GameObject created and marked DontDestroyOnLoad");
+        Log.LogInfo("Host GameObject created; OverlayUI attached");
     }
 }

@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <AssemblyName>CheatMenu-v2</AssemblyName>
+    <RootNamespace>CheatMenuV2</RootNamespace>
+    <Version>0.1.0</Version>
+    <Description>BepInEx 6 IL2CPP cheat menu for Heroes of Might and Magic: Olden Era</Description>
+    <Authors>Velebit</Authors>
+    <Copyright>Copyright (c) 2026 Velebit. MIT License.</Copyright>
+    <NoWarn>CS0436;CS1701;CS1702</NoWarn>
+    <DebugType>portable</DebugType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="BepInEx.Core">           <HintPath>refs\BepInEx.Core.dll</HintPath>           <Private>false</Private> </Reference>
+    <Reference Include="BepInEx.Unity.IL2CPP">   <HintPath>refs\BepInEx.Unity.IL2CPP.dll</HintPath>   <Private>false</Private> </Reference>
+    <Reference Include="BepInEx.Unity.Common">   <HintPath>refs\BepInEx.Unity.Common.dll</HintPath>   <Private>false</Private> </Reference>
+    <Reference Include="0Harmony">               <HintPath>refs\0Harmony.dll</HintPath>               <Private>false</Private> </Reference>
+    <Reference Include="Il2CppInterop.Runtime">  <HintPath>refs\Il2CppInterop.Runtime.dll</HintPath>  <Private>false</Private> </Reference>
+    <Reference Include="Il2CppInterop.Common">   <HintPath>refs\Il2CppInterop.Common.dll</HintPath>   <Private>false</Private> </Reference>
+    <Reference Include="Il2CppInterop.HarmonySupport"> <HintPath>refs\Il2CppInterop.HarmonySupport.dll</HintPath> <Private>false</Private> </Reference>
+    <Reference Include="UnityEngine.CoreModule"> <HintPath>refs\UnityEngine.CoreModule.dll</HintPath> <Private>false</Private> </Reference>
+    <Reference Include="UnityEngine.IMGUIModule"> <HintPath>refs\UnityEngine.IMGUIModule.dll</HintPath> <Private>false</Private> </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule"> <HintPath>refs\UnityEngine.InputLegacyModule.dll</HintPath> <Private>false</Private> </Reference>
+    <Reference Include="UnityEngine.UIModule">   <HintPath>refs\UnityEngine.UIModule.dll</HintPath>   <Private>false</Private> </Reference>
+    <Reference Include="Hex">                    <HintPath>refs\Hex.dll</HintPath>                    <Private>false</Private> </Reference>
+    <Reference Include="Hex.Shared">             <HintPath>refs\Hex.Shared.dll</HintPath>             <Private>false</Private> </Reference>
+    <Reference Include="Il2Cppmscorlib">         <HintPath>refs\Il2Cppmscorlib.dll</HintPath>         <Private>false</Private> </Reference>
+    <Reference Include="Il2CppSystem">           <HintPath>refs\Il2CppSystem.dll</HintPath>           <Private>false</Private> </Reference>
+    <Reference Include="Il2CppSystem.Core">      <HintPath>refs\Il2CppSystem.Core.dll</HintPath>      <Private>false</Private> </Reference>
+  </ItemGroup>
+
+</Project>

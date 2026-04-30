@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace CheatMenuV2.UI;
@@ -17,10 +16,10 @@ public class OverlayUI : MonoBehaviour
     private float  _flashUntilTime;
 
     // Per-frame record of drawn rects, used for click-through prevention (Task 12).
-    // Exposed as Rect[] (not IReadOnlyList) because Il2CppInterop can't marshal
-    // generic interfaces across the IL2CPP boundary.
-    private readonly List<Rect> _rectsThisFrame = new List<Rect>(8);
-    public Rect[] ConsumedRectsThisFrame => _rectsThisFrame.ToArray();
+    // Exposed as a plain public field, NOT a property — Il2CppInterop tries to
+    // generate a getter proxy for any property on an injected MonoBehaviour and
+    // warns when the return type isn't marshallable. A plain field skips that.
+    public readonly List<Rect> ConsumedRectsThisFrame = new List<Rect>(8);
 
     public void Flash(string message, float seconds = 2f)
     {
@@ -30,7 +29,7 @@ public class OverlayUI : MonoBehaviour
 
     private void OnGUI()
     {
-        _rectsThisFrame.Clear();
+        ConsumedRectsThisFrame.Clear();
 
         var label = $"CheatMenu-v2 | Mode: {ModeText} | F10: toggle";
         if (_flashText != null && Time.unscaledTime < _flashUntilTime)
@@ -43,6 +42,6 @@ public class OverlayUI : MonoBehaviour
         const float margin = 8f;
         var rect = new Rect(Screen.width - width - margin, margin, width, height);
         GUI.Box(rect, label);
-        _rectsThisFrame.Add(rect);
+        ConsumedRectsThisFrame.Add(rect);
     }
 }

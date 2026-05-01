@@ -56,7 +56,28 @@ shipped Addressables), drop to direct mutation:
 
 ## Native cheat panel asset paths
 
-To be populated by Task 9 / 10 if Addressables / Resources tiers fire.
+**Tier 1 hit — Addressables and Resources.Load tiers not needed.**
+
+`Resources.FindObjectsOfTypeAll<Hex.Cheat.BhControllerCheat>()` returns 3
+instances on a loaded skirmish/campaign save (one each for world, city, battle
+contexts — the first one is named `CheatWorld`). They're left in the shipped
+scene hierarchy, just disabled. Calling `gameObject.SetActive(true)` then
+`hrf()` (the native `BhScreen.Show` entry point) renders them.
+
+Tier 2 (Addressables) and tier 3 (`Resources.Load`) from the original plan
+are **not implemented** because:
+
+1. `Unity.Addressables.dll` is absent from `BepInEx/interop/` on this build —
+   the IL2CPP interop generator didn't emit it (probably because no game
+   code we care about uses Addressables APIs in a public surface).
+2. Tier 1 is sufficient — Hex's dev cheat tooling stays in the scene
+   hierarchy in the shipped product.
+
+If a future game patch strips the prefabs from shipped scenes, tiers 2/3
+would need to be implemented. The `NativePanelDriver.TryFind()` method
+would extend to: try `LoadAssetAsync<GameObject>("BhControllerCheat")` on
+keys `["BhControllerCheat", "CheatPanel", "Cheat/BhControllerCheat",
+"UI/CheatPanel"]`, then `Resources.Load<GameObject>` on the same set.
 
 ## IL2CPP interop quirks observed (cumulative)
 

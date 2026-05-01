@@ -16,11 +16,38 @@ public class InputGate : MonoBehaviour
 
     private void Update()
     {
+        // Hotkey toggle
         if (UnityEngine.Input.GetKeyDown(Toggle) && !IsModifierHeld() && !IsTextInputFocused())
         {
             if (OnTogglePressed != null) OnTogglePressed();
             else Plugin.Overlay.Flash($"{Toggle} pressed (no handler yet)");
         }
+
+        // Click-through prevention: if any mouse button is down and the cursor sits
+        // over our IMGUI, swallow the input so the game's raycasters don't see it.
+        if (UnityEngine.Input.GetMouseButton(0) || UnityEngine.Input.GetMouseButton(1) || UnityEngine.Input.GetMouseButton(2))
+        {
+            if (CursorOverOurUI()) UnityEngine.Input.ResetInputAxes();
+        }
+    }
+
+    private static bool CursorOverOurUI()
+    {
+        // EventSystem catches uGUI elements layered above us
+        var es = EventSystem.current;
+        if (es != null && es.IsPointerOverGameObject()) return true;
+
+        // IMGUI rect check — IMGUI doesn't participate in EventSystem so this is the
+        // actual mechanism. IMGUI uses top-left origin; Input.mousePosition uses
+        // bottom-left, so flip y.
+        var rects = Plugin.Overlay?.ConsumedRectsThisFrame;
+        if (rects == null || rects.Count == 0) return false;
+
+        var p = UnityEngine.Input.mousePosition;
+        var imguiP = new Vector2(p.x, Screen.height - p.y);
+        for (int i = 0; i < rects.Count; i++)
+            if (rects[i].Contains(imguiP)) return true;
+        return false;
     }
 
     private static bool IsModifierHeld()

@@ -14,7 +14,7 @@ public class Plugin : BasePlugin
 {
     public const string Guid    = "com.velebit.cheatmenuv2";
     public const string Name    = "CheatMenu-v2";
-    public const string Version = "0.1.0";
+    public const string Version = "0.1.5";
 
     internal static new BepInEx.Logging.ManualLogSource Log = null;
     internal static GameObject  Host    = null;
@@ -33,6 +33,20 @@ public class Plugin : BasePlugin
             ? System.IO.File.GetLastWriteTimeUtc(exePath).ToString("yyyy-MM-dd")
             : "unknown";
         Log.LogInfo($"Loaded — BepInEx 6 IL2CPP, target HeroesOldenEra build {exeBuild}");
+
+        try
+        {
+            var hexPath = System.IO.Path.Combine(BepInEx.Paths.PluginPath, "..", "interop", "Hex.dll");
+            if (System.IO.File.Exists(hexPath))
+            {
+                using var sha = System.Security.Cryptography.SHA256.Create();
+                using var fs  = System.IO.File.OpenRead(hexPath);
+                var digest = BitConverter.ToString(sha.ComputeHash(fs)).Replace("-", "").Substring(0, 16);
+                Log.LogInfo($"Runtime Hex.dll sha256={digest} (first 16 hex chars)");
+            }
+        }
+        catch (Exception e) { Log.LogWarning($"Hex.dll fingerprint skipped: {e.Message}"); }
+
         Log.LogInfo($"GUID={Guid} Version={Version}");
 
         ToggleKey = Config.Bind(

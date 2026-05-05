@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.1.5
+
+- fix(native): dual-target architecture (controller for show, panel for hide) and validation
+
+## 0.1.4
+
+- fix(native): context-aware controller discovery and exact-method caching
+
+## 0.1.3
+
+- fix(native): diagnostic-first fallback method discovery
+
+## 0.1.2
+
+- fix(native): patch-resilient binding via typed wrapper call
+
+## 0.1.1
+
+- fix(native): resilient BhWindowCheatPanel binding (Open/Exit) — survives obfuscation
+
 ## [0.1.0] - 2026-05-01 — Phase A: proof of life
 
 First working release. All four Phase A acceptance criteria from the spec verified

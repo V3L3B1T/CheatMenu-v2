@@ -1,10 +1,10 @@
 # CheatMenu-v2
 
-A BepInEx 6 IL2CPP plugin for **Heroes of Might and Magic: Olden Era** (day-one Early Access build, 2026-04-30) that re-exposes the game's built-in developer cheat panel via a single hotkey.
+A BepInEx 6 IL2CPP plugin for **Heroes of Might and Magic: Olden Era** that re-exposes the game's built-in developer cheat panel via a single hotkey.
 
 The shipped game's `Hex.dll` already contains a complete, clean-named `Hex.Cheat.UI.*` namespace — `BhControllerCheat`, `BhWorldCheatPanel`, `BhBattleCheatPanel`, `BhCityCheatPanel`, `BhResourcePanel`, plus state machines and pickers for resources, heroes, units, artefacts, and spells. This plugin's only job is to find that panel in the loaded scene, activate it, and call its native `Show` method.
 
-**Status:** **Phase A complete (v0.1.0).** Native dev panel renders successfully in both World and Battle contexts on the day-one build. Full cheat surface (gold, units, heroes, spells, artefacts) accessible via the panel's own UI.
+**Status:** **v0.1.5 update complete.** The plugin has been updated with a patch-resilient binding architecture and is **confirmed working again** with the latest game update patch. Native dev panel renders successfully in both World and Battle contexts. Full cheat surface (gold, units, heroes, spells, artefacts) accessible via the panel's own UI.
 
 ## Features
 
@@ -17,7 +17,7 @@ The shipped game's `Hex.dll` already contains a complete, clean-named `Hex.Cheat
 
 ## Requirements
 
-- Heroes of Might and Magic: Olden Era — verified against the day-one build (`HeroesOldenEra.exe` last-modified 2026-04-30).
+- Heroes of Might and Magic: Olden Era — verified against the latest Early Access build updates.
 - BepInEx **6.0.0-be.755** IL2CPP edition. Verify by checking that `BepInEx/LogOutput.log` starts with `BepInEx 6.0.0-be.755 - HeroesOldenEra`.
 - A single-player skirmish or campaign save. **Do not use this in matchmade, ranked, or leaderboard-tracked modes** — Olden Era ships with Epic Online Services and an analytics collector; cheat-triggered state changes may be reported.
 

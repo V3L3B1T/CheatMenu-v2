@@ -12,7 +12,7 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <AssemblyName>CheatMenu-v2</AssemblyName>
     <RootNamespace>CheatMenuV2</RootNamespace>
-    <Version>0.1.0</Version>
+    <Version>0.1.5</Version>
     <Description>BepInEx 6 IL2CPP cheat menu for Heroes of Might and Magic: Olden Era</Description>
     <Authors>Velebit</Authors>
     <Copyright>Copyright (c) 2026 Velebit. MIT License.</Copyright>
